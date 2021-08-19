@@ -24,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import spring.boot.tptRpg.model.MarchandPotion;
+import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IMarchandPotionRepository;
 
 @RestController
@@ -56,9 +57,9 @@ public class MarchandPotionRestController {
 	@PostMapping("")
 	@JsonView(Views.ViewMarchandPotion.class)
 	public MarchandPotion create(@Valid @RequestBody MarchandPotion marchandPotion, BindingResult result) {
-		if(result.hasErrors()) {
-			throw new MarchandPotionValidationException();
-		}
+//		if(result.hasErrors()) {
+//			throw new MarchandPotionValidationException();
+//		}
 		
 		marchandPotion = marchandPotionRepo.save(marchandPotion);
 

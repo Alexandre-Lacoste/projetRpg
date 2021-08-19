@@ -34,7 +34,7 @@ public class Arme{
 	@Column(name="typeArme")
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.ViewCommon.class)
-	private TypeArme typeArme;
+	private TypeArme typearme;
 	@Column(name="description")
 	@Lob
 	@JsonView(Views.ViewCommon.class)
@@ -68,7 +68,7 @@ public class Arme{
 		this.id = id;
 		this.version = version;
 		this.nom = nom;
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 		this.description = description;
 		this.attaque = attaque;
 		this.agilite = agilite;
@@ -85,7 +85,7 @@ public class Arme{
 			double prixVente) {
 		super();
 		this.nom = nom;
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 		this.description = description;
 		this.attaque = attaque;
 		this.agilite = agilite;
@@ -129,11 +129,11 @@ public class Arme{
 	}
 
 	public TypeArme getTypeArme() {
-		return typeArme;
+		return typearme;
 	}
 
 	public void setTypeArme(TypeArme typeArme) {
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 	}
 
 	public String getDescription() {
@@ -194,7 +194,7 @@ public class Arme{
 
 	@Override
 	public String toString() {
-		return "Arme [id=" + id + ", version=" + version + ", nom=" + nom + ", typeArme=" + typeArme + ", description="
+		return "Arme [id=" + id + ", version=" + version + ", nom=" + nom + ", typeArme=" + typearme + ", description="
 				+ description + ", attaque=" + attaque + ", agilite=" + agilite + ", prixAchat=" + prixAchat
 				+ ", prixVente=" + prixVente+"]";
 	}

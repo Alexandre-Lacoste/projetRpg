@@ -24,7 +24,7 @@ import spring.boot.tptRpg.repository.IArmeRepository;
 
 @RestController
 @RequestMapping("/arme")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class ArmeRestController {
 	
 	@Autowired

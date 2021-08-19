@@ -11,38 +11,38 @@ public interface IObjetRepository extends JpaRepository<Objet, Long>{
 	Integer findIdObjetForNom(@Param("nom") String nom);
 
 	
-	@Query("SELECT o FROM Objet o ORDER BY o.PrixAchat ASC")
-	Objet orderByBuyingPriceAsc();
+//	@Query("SELECT o FROM Objet o ORDER BY o.prixAchat ASC")
+//	Objet orderByBuyingPriceAsc();
+//	
+//	@Query("SELECT o FROM Objet o ORDER BY o.prixAchat DESC")
+//	Objet orderByBuyingPriceDesc();
+//	
+//	@Query("SELECT o FROM Objet o ORDER BY o.prixVente ASC")
+//	Objet orderBySellingPriceAsc();
+//	
+//	@Query("SELECT o FROM Objet o ORDER BY o.prixVente DESC")
+//	Objet orderBySellingPriceDesc();
 	
-	@Query("SELECT o FROM Objet o ORDER BY o.PrixAchat DESC")
-	Objet orderByBuyingPriceDesc();
+//	// Pour trouver les classer en fonction de leur type
+//	@Query("SELECT o FROM Objet o ORDER BY o.typeObjet ASC")
+//	Objet findAllByTypeObjetAsc();
+//	@Query("SELECT o FROM Objet o ORDER BY o.typeObjet DESC")
+//	Objet findAllByTypeObjetDesc();
 	
-	@Query("SELECT o FROM Objet o ORDER BY o.PrixVente ASC")
-	Objet orderBySellingPriceAsc();
-	
-	@Query("SELECT o FROM Objet o ORDER BY o.PrixVente DESC")
-	Objet orderBySellingPriceDesc();
-	
-	// Pour trouver les classer en fonction de leur type
-	@Query("SELECT o FROM Objet o ORDER BY o.TypeObjet ASC")
-	Objet findAllByTypeObjetAsc();
-	@Query("SELECT o FROM Objet o ORDER BY o.TypeObjet DESC")
-	Objet findAllByTypeObjetDesc();
-	
-	//Pour choisir un type precis à afficher
-	@Query("SELECT o FROM Objet o WHERE o.TypeObjet = :type")
-	Objet findTypeObjet(@Param("type") Long TypeObjet);
+//	//Pour choisir un type precis à afficher
+//	@Query("SELECT o FROM Objet o WHERE o.typeObjet = :type")
+//	Objet findTypeObjet(@Param("type") Long typeObjet);
 	
 	
 	@Query("SELECT o.qte FROM Objet o WHERE o.nom = 'Gold'")
 	double findQteGold();
 	
 	
-	
-	@Query("SELECT o.PrixAchat FROM Objet o where o.nom = :nom")
-	Objet findObjetBuyingPriceFromName(@Param("nom") Long nom);
-	
-	
+//	
+//	@Query("SELECT o.prixAchat FROM Objet o where o.nom = :nom")
+//	double findObjetBuyingPriceFromName(@Param("nom") Long nom);
+//	
+//	
 	
 	
 	

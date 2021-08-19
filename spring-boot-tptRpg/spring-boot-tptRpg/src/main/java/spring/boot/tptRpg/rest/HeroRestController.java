@@ -24,7 +24,7 @@ import spring.boot.tptRpg.repository.IPersonnageRepository;
 
 @RestController
 @RequestMapping("/hero")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class HeroRestController {
 	
 	@Autowired

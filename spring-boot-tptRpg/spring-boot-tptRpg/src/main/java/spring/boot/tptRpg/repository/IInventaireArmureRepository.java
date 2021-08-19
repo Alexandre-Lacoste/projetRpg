@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import spring.boot.tptRpg.model.*;
 
+import spring.boot.tptRpg.model.Armure;
+import spring.boot.tptRpg.model.InventaireArmure;
+import spring.boot.tptRpg.model.TypeArmure;
 
 public interface IInventaireArmureRepository  extends JpaRepository<InventaireArmure, Long>{
 	@Query("select ip.armure from InventaireArmure ip  where ip.inventaire.id = :id")

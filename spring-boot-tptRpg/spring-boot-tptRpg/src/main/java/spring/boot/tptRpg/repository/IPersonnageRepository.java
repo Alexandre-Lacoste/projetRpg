@@ -13,7 +13,6 @@ import spring.boot.tptRpg.model.Personnage;
 import spring.boot.tptRpg.model.TypeMonstre;
 import spring.boot.tptRpg.model.TypePersonnage;
 
-
 public interface IPersonnageRepository extends JpaRepository<Personnage, Long> {
 	@Query("select h from Hero h ")
 	List<Hero> findAllHero();

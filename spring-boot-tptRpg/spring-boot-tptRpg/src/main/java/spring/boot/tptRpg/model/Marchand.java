@@ -10,24 +10,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Marchand")
 public class Marchand {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="nom")
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@OneToMany(mappedBy = "marchand")
+	@JsonView(Views.ViewMarchand.class)
 	private List<MarchandArme> armes = new ArrayList<MarchandArme>();
 	@OneToMany(mappedBy = "marchand")
+	@JsonView(Views.ViewMarchand.class)
 	private List<MarchandArmure> armures = new ArrayList<MarchandArmure>();
 	@OneToMany(mappedBy = "marchand")
+	@JsonView(Views.ViewMarchand.class)
 	private List<MarchandPotion> potions = new ArrayList<MarchandPotion>();
 	
 	public Marchand(Long id, int version, String nom, List<MarchandArme> armes, List<MarchandArmure> armure,

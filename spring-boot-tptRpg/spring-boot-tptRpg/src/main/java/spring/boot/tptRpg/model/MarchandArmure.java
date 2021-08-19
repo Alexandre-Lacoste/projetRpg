@@ -11,24 +11,31 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="MarchandArmure")
 public class MarchandArmure {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="quatite")
+	@JsonView(Views.ViewCommon.class)
 	private double quantite;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="armure_id")
+	@JsonView(Views.ViewMarchandArmure.class)
 	private Armure armure;
 	
 	@ManyToOne
 	@JoinColumn(name="marchand_id")
+	@JsonView(Views.ViewMarchandArmure.class)
 	private Marchand marchand;
 	
 	public MarchandArmure() {

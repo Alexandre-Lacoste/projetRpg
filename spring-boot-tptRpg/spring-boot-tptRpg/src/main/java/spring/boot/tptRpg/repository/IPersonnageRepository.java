@@ -29,5 +29,8 @@ public interface IPersonnageRepository extends JpaRepository<Personnage, Long> {
 	
 	@Query("select h from Hero h where h.id = :id")
 	Optional<Hero> findHeroById(@Param("id") Long id);
+	
+	@Query("select m from Monstre m where m.id = :id")
+	Optional<Monstre> findMonstreById(@Param("id") Long id);
 }
 

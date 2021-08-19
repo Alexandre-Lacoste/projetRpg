@@ -18,32 +18,51 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import spring.boot.tptRpg.model.Potion;
+import spring.boot.tptRpg.model.Arme;
 import spring.boot.tptRpg.model.Views;
-import spring.boot.tptRpg.repository.IPotionRepository;
+import spring.boot.tptRpg.repository.IArmeRepository;
 
 @RestController
-@RequestMapping("/potion")
+@RequestMapping("/arme")
 @CrossOrigin("")
-public class PotionRestController {
+public class ArmeRestController {
 	
 	@Autowired
-	private IPotionRepository potionRepo;
+	private IArmeRepository armeRepo;
 	
 	@GetMapping("")
-	@JsonView(Views.ViewPotion.class)
-	public List<Potion> findAll(){
-		return potionRepo.findAll();
+	@JsonView(Views.ViewArme.class)
+	public List<Arme> findAll(){
+		return armeRepo.findAll();
+	}
+	
+	@GetMapping("/detail")
+	@JsonView(Views.ViewArmeDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public List<Arme> findDetailAll(){
+		return armeRepo.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewPotion.class)
-	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public Potion findPotionId(@PathVariable Long id) {
-		Optional<Potion> optPotion = potionRepo.findById(id);
+	@JsonView(Views.ViewArme.class)
+	public Arme findArmeId(@PathVariable Long id) {
+		Optional<Arme> optArme = armeRepo.findByArmeId(id);
 		
-		if (optPotion.isPresent()) {
-			return optPotion.get();
+		if (optArme.isPresent()) {
+			return optArme.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.ViewArmeDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public Arme findArmeDetailId(@PathVariable Long id) {
+		Optional<Arme> optArme = armeRepo.findByArmeId(id);
+		
+		if (optArme.isPresent()) {
+			return optArme.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
@@ -52,32 +71,32 @@ public class PotionRestController {
 	@PostMapping
 	//@JsonView(Views.ViewAdmin.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
-	public Potion create(@RequestBody Potion Potion) {
-		Potion = potionRepo.save(Potion);
-		return Potion;
+	public Arme create(@RequestBody Arme arme) {
+		arme = armeRepo.save(arme);
+		return arme;
 	}
 	
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewPotion.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
-	public Potion update(@RequestBody Potion potion, @PathVariable Long id) {
-		if (!potionRepo.existsById(id)) {
+	@JsonView(Views.ViewInventaireArme.class)
+	public  Arme update(@RequestBody Arme arme  , @PathVariable Long id) {
+		if (!armeRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		potion = potionRepo.save(potion);
+		arme = armeRepo.save(arme);
 
-		return potion;
+		return arme ;
 	}
 	
 	@DeleteMapping
 	//@JsonView(Views.ViewAdmin.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	public void delete(@PathVariable Long id) {
-		if(!potionRepo.existsById(id)) {
+		if(!armeRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
-		potionRepo.deleteById(id);
+		armeRepo.deleteById(id);
 	}
 
 }

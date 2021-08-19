@@ -13,37 +13,51 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Arme")
 public class Arme{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class})
 	private Long id;
 	@Version
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private int version;
 	@Column(name="nom")
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Column(name="typeArme")
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private TypeArme typeArme;
 	@Column(name="description")
 	@Lob
+	@JsonView(Views.ViewCommon.class)
 	private String description;
 	@Column(name="attaque")
+	@JsonView({Views.ViewArme.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double attaque;
 	@Column(name="agilite")
+	@JsonView({Views.ViewArme.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double agilite;
 	@Column(name="prixAchat")
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixAchat;
 	@Column(name="prixVente")
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixVente;
 	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<MarchandArme> marchandArmes = new ArrayList<MarchandArme>();
+	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<InventaireArme> inventaireArme = new ArrayList<InventaireArme>();
 	
 	

@@ -1,6 +1,7 @@
 package spring.boot.tptRpg.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,12 @@ public interface IPersonnageRepository extends JpaRepository<Personnage, Long> {
 	List<Monstre> findAllMonstre();
 	
 	@Query("select m from Monstre m where m.typeMonstre = :type")
-	List<Monstre> findAllMonstreWithSpecificType(@Param("type") TypeMonstre type);	 
+	List<Monstre> findAllMonstreWithSpecificType(@Param("type") TypeMonstre type);	
+	
+	@Query("select h from Hero h where h.id = :id")
+	Optional<Hero> findHeroById(@Param("id") Long id);
+	
+	@Query("select m from Monstre m where m.id = :id")
+	Optional<Monstre> findMonstreById(@Param("id") Long id);
 }
+

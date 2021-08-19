@@ -10,33 +10,49 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("hero")
 public class Hero extends Personnage{
 	@Enumerated(EnumType.STRING)
 	@Column(name="TypePersonnage")
+	@JsonView(Views.ViewCommon.class)
 	private TypePersonnage typePersonnage;
 	@Column()
+	@JsonView({Views.ViewHeroDetail.class,Views.ViewUtilisateurDetail.class})
 	private double coefAttaque;
 	@Column()
+	@JsonView({Views.ViewHeroDetail.class,Views.ViewUtilisateurDetail.class})
 	private double coefDefense;
 	@Column()
+	@JsonView({Views.ViewHeroDetail.class,Views.ViewUtilisateurDetail.class})
 	private double coefVie;
 	@Column()
+	@JsonView({Views.ViewHeroDetail.class,Views.ViewUtilisateurDetail.class})
 	private double coefPrecision;
 	@Column()
+	@JsonView({Views.ViewHeroDetail.class,Views.ViewUtilisateurDetail.class})
 	private double coefVitesse;
 	@Column()
+	@JsonView({Views.ViewHero.class,Views.ViewUtilisateurDetail.class})
 	private double attaque;
 	@Column()
+	@JsonView({Views.ViewHero.class,Views.ViewUtilisateurDetail.class})
 	private double defense;
 	@Column()
+	@JsonView({Views.ViewHero.class,Views.ViewUtilisateurDetail.class})
 	private double vie;
 	@Column()
+	@JsonView({Views.ViewHero.class,Views.ViewUtilisateurDetail.class})
 	private double agilite;
 	@Column()
+	@JsonView({Views.ViewHero.class,Views.ViewUtilisateurDetail.class})
 	private double vitesse;
+	
 	@OneToMany(mappedBy = "hero")
+	@JsonIgnore
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 	
 	public Hero() {

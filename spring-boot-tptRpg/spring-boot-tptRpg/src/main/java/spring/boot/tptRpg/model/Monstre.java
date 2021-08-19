@@ -11,32 +11,47 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("monstre")
 public class Monstre extends Personnage {
 	@Enumerated(EnumType.STRING)
 	@Column(name="TypeMonstre")
+	@JsonView(Views.ViewCommon.class)
 	private TypeMonstre typeMonstre;
 	@Column()
+	@JsonView(Views.ViewMonstre.class)
 	private double attaque;
 	@Column()
+	@JsonView(Views.ViewMonstre.class)
 	private double defense;
 	@Column()
+	@JsonView(Views.ViewMonstre.class)
 	private double vie;
 	@Column()
+	@JsonView(Views.ViewMonstre.class)
 	private double agilite;
 	@Column()
+	@JsonView(Views.ViewMonstre.class)
 	private double vitesse;
 	@Column()
+	@JsonView(Views.ViewMonstreDetail.class)
 	private int gold;
 	@Column()
+	@JsonView(Views.ViewMonstreDetail.class)
 	private int exp;
 	@ManyToOne
 	@JoinColumn(name="arme_id")
+	@JsonView(Views.ViewMonstreDetail.class)
 	private Arme arme;
 	@ManyToOne
 	@JoinColumn(name="armure_id")
+	@JsonView(Views.ViewMonstreDetail.class)
 	private Armure armure;
+	
+	
 	public Monstre() {
 		super();
 		// TODO Auto-generated constructor stub

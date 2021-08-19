@@ -18,76 +18,77 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import spring.boot.tptRpg.model.Monstre;
+import spring.boot.tptRpg.model.Hero;
 import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IPersonnageRepository;
 
 @RestController
-@RequestMapping("/monstre")
+@RequestMapping("/hero")
 @CrossOrigin("")
-public class MonstreRestController {
+public class HeroRestController {
 	
 	@Autowired
 	private IPersonnageRepository persoRepo;
 	
 	@GetMapping("")
-	@JsonView(Views.ViewMonstre.class)
-	public List<Monstre> findAll(){
-		return persoRepo.findAllMonstre();
+	@JsonView(Views.ViewHero.class)
+	//@PreAuthorize("hasAnyRole('GUEST','USER','ADMIN')")
+	public List<Hero> findAll(){
+		return persoRepo.findAllHero();
 	}
-
+	
 	@GetMapping("/detail")
-	@JsonView(Views.ViewMonstreDetail.class)
-	public List<Monstre> findAllDetail(){
-		return persoRepo.findAllMonstre();
+	@JsonView(Views.ViewHeroDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public List<Hero> findAllDetail(){
+		return persoRepo.findAllHero();
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewMonstre.class)
-	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public Monstre findMonstreId(@PathVariable Long id) {
-		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
+	@JsonView(Views.ViewHero.class)
+	//@PreAuthorize("hasAnyRole('GUEST','USER','ADMIN')")
+	public Hero findHeroId(@PathVariable Long id) {
+		Optional<Hero> optHero = persoRepo.findHeroById(id);
 		
-		if (optMonstre.isPresent()) {
-			return optMonstre.get();
+		if (optHero.isPresent()) {
+			return optHero.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
 	
-	
 	@GetMapping("/{id}/detail")
-	@JsonView(Views.ViewMonstreDetail.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public Monstre findMonstreDetailId(@PathVariable Long id) {
-		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
+	public Hero findHeroDetailId(@PathVariable Long id) {
+		Optional<Hero> optHero = persoRepo.findHeroById(id);
 		
-		if (optMonstre.isPresent()) {
-			return optMonstre.get();
+		if (optHero.isPresent()) {
+			return optHero.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
+	}
+	
+	@PutMapping("/{id}")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@JsonView(Views.ViewHero.class)
+	public  Hero update(@RequestBody Hero hero  , @PathVariable Long id) {
+		if (!persoRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+
+		hero = persoRepo.save(hero);
+
+		return hero ;
 	}
 	
 	@PostMapping
 	//@JsonView(Views.ViewAdmin.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
-	public Monstre create(@RequestBody Monstre monstre) {
-		monstre = persoRepo.save(monstre);
-		return monstre;
-	}
-	
-	@PutMapping("/{id}")
-	//@PreAuthorize("hasAnyRole('ADMIN')")
-	@JsonView(Views.ViewMonstre.class)
-	public  Monstre update(@RequestBody Monstre monstre  , @PathVariable Long id) {
-		if (!persoRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-		}
-
-		monstre = persoRepo.save(monstre);
-
-		return monstre;
+	public Hero create(@RequestBody Hero hero) {
+		hero = persoRepo.save(hero);
+		return hero;
 	}
 	
 	@DeleteMapping

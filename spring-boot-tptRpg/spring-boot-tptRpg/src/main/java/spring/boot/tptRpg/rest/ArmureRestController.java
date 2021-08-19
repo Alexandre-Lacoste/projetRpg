@@ -26,7 +26,7 @@ import spring.boot.tptRpg.repository.IArmureRepository;
 
 @RestController
 @RequestMapping("/armure")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class ArmureRestController {
 	
 	@Autowired

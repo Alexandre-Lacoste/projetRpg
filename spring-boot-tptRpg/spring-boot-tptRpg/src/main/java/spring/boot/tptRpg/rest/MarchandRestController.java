@@ -24,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import spring.boot.tptRpg.model.Marchand;
+import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IMarchandRepository;
 
 @RestController
@@ -56,9 +57,9 @@ public class MarchandRestController {
 	@PostMapping("")
 	@JsonView(Views.ViewMarchand.class)
 	public Marchand create(@Valid @RequestBody Marchand marchand, BindingResult result) {
-		if(result.hasErrors()) {
-			throw new MarchandValidationException();
-		}
+//		if(result.hasErrors()) {
+//			throw new MarchandValidationException();
+//		}
 		
 		marchand = marchandRepo.save(marchand);
 

@@ -24,7 +24,7 @@ import spring.boot.tptRpg.repository.IPersonnageRepository;
 
 @RestController
 @RequestMapping("/monstre")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class MonstreRestController {
 	
 	@Autowired

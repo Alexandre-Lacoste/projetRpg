@@ -9,20 +9,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "InventairePotion")
 public class InventairePotion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double qte;
 	@ManyToOne
 	@JoinColumn(name = "inventaire_id")
+	@JsonIgnore
 	private Inventaire inventaire;
 	@ManyToOne
 	@JoinColumn(name = "potion_id")
+	@JsonIgnore
 	private Potion potion;
 	
 	

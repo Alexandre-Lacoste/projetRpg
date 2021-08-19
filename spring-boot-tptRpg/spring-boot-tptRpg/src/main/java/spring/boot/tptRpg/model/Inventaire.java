@@ -12,29 +12,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Inventaire")
 public class Inventaire {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewInventaire.class)
 	private Long id;
 	
 	@OneToOne
 	@JoinColumn(name = "objet_id")
+	@JsonView(Views.ViewInventaire.class)
 	private Objet objet;	
 	
 	@OneToOne
 	@JoinColumn(name = "utilisateur_id")
+	@JsonIgnore
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "inventaire")
+	@JsonIgnore
 	private List<InventairePotion> inventairePotion = new ArrayList<InventairePotion>();
 	
 	@OneToMany(mappedBy = "inventaire")
+	@JsonIgnore
 	private List<InventaireArme> inventaireArme = new ArrayList<InventaireArme>();
 	
 	@OneToMany(mappedBy = "inventaire")
+	@JsonIgnore
 	private List<InventaireArmure> inventaireArmure = new ArrayList<InventaireArmure>();
 
 	

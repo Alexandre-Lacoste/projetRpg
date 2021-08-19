@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("user")
 public class Utilisateur extends Compte {
@@ -17,16 +20,19 @@ public class Utilisateur extends Compte {
 
 	@ManyToOne
 	@JoinColumn(name="hero_id")
+	@JsonIgnore
 	private Hero hero;
 	
 
 	@OneToOne
 	@JoinColumn(name="inventaire")
+	@JsonIgnore
 	private Inventaire inventaire;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="Arme")
+	@JsonIgnore
 	private Arme arme;
 	
 	@ManyToOne
@@ -35,44 +41,63 @@ public class Utilisateur extends Compte {
 	
 	@OneToOne
 	@JoinColumn(name="histoire")
+	@JsonIgnore
 	private Histoire histoire;
 
 	
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private double vie;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private double attaque;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private double defense;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private double agilite;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private double vitesse;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double vieMax;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double attaqueMax;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double defenseMax;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double agiliteMax;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double vitesseMax;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptEmpoisonnement;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptEtourdissement;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptSaignement;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptBrulure;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptCombat;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptCombatGagne;
 	@Column()
+	@JsonView(Views.ViewUtilisateur.class)
 	private int cptMonstreVaincu;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private int exp;
 	
 	

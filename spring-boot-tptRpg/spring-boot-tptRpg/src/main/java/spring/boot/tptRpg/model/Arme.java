@@ -13,37 +13,51 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Arme")
 public class Arme{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="nom")
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Column(name="typeArme")
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private TypeArme typeArme;
 	@Column(name="description")
 	@Lob
+	@JsonView(Views.ViewCommon.class)
 	private String description;
 	@Column(name="attaque")
+	@JsonView(Views.ViewCommon.class)
 	private double attaque;
 	@Column(name="agilite")
+	@JsonView(Views.ViewCommon.class)
 	private double agilite;
 	@Column(name="prixAchat")
+	@JsonView(Views.ViewCommon.class)
 	private double prixAchat;
 	@Column(name="prixVente")
+	@JsonView(Views.ViewCommon.class)
 	private double prixVente;
 	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<MarchandArme> marchandArmes = new ArrayList<MarchandArme>();
+	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<InventaireArme> inventaireArme = new ArrayList<InventaireArme>();
 	
 	

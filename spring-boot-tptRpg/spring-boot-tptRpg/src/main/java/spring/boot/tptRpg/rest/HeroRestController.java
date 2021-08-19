@@ -31,14 +31,35 @@ public class HeroRestController {
 	
 	@GetMapping("")
 	@JsonView(Views.ViewHero.class)
+	//@PreAuthorize("hasAnyRole('GUEST','USER','ADMIN')")
 	public List<Hero> findAll(){
+		return persoRepo.findAllHero();
+	}
+	
+	@GetMapping("/detail")
+	@JsonView(Views.ViewHeroDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public List<Hero> findAllDetail(){
 		return persoRepo.findAllHero();
 	}
 	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewHero.class)
-	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	//@PreAuthorize("hasAnyRole('GUEST','USER','ADMIN')")
 	public Hero findHeroId(@PathVariable Long id) {
+		Optional<Hero> optHero = persoRepo.findHeroById(id);
+		
+		if (optHero.isPresent()) {
+			return optHero.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.ViewHeroDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public Hero findHeroDetailId(@PathVariable Long id) {
 		Optional<Hero> optHero = persoRepo.findHeroById(id);
 		
 		if (optHero.isPresent()) {

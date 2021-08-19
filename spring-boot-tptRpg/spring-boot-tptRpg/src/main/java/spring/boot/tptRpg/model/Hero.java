@@ -21,34 +21,34 @@ public class Hero extends Personnage{
 	@JsonView(Views.ViewCommon.class)
 	private TypePersonnage typePersonnage;
 	@Column()
-	@JsonView(Views.ViewHero.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	private double coefAttaque;
 	@Column()
-	@JsonView(Views.ViewHero.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	private double coefDefense;
 	@Column()
-	@JsonView(Views.ViewHero.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	private double coefVie;
 	@Column()
-	@JsonView(Views.ViewHero.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	private double coefPrecision;
 	@Column()
-	@JsonView(Views.ViewHero.class)
+	@JsonView(Views.ViewHeroDetail.class)
 	private double coefVitesse;
 	@Column()
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewHero.class)
 	private double attaque;
 	@Column()
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewHero.class)
 	private double defense;
 	@Column()
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewHero.class)
 	private double vie;
 	@Column()
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewHero.class)
 	private double agilite;
 	@Column()
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewHero.class)
 	private double vitesse;
 	
 	@OneToMany(mappedBy = "hero")

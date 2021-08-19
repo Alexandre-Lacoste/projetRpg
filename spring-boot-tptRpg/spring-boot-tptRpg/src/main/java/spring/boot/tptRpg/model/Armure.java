@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Armure {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewArmureDetail.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewArmureDetail.class)
 	private int version;
 	@Column(name="nom")
 	@JsonView(Views.ViewCommon.class)
@@ -51,10 +51,10 @@ public class Armure {
 	private double vitesse;
 	
 	@Column(name="prixVente")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmureDetail.class,Views.ViewMonstreDetail.class})
 	private double prixVente;
 	@Column(name="prixAchat")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.ViewArmureDetail.class)
 	private double prixAchat;
 	
 	@OneToMany(mappedBy = "armure")

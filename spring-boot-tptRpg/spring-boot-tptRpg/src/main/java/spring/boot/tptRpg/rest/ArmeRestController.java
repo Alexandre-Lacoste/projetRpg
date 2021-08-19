@@ -35,10 +35,29 @@ public class ArmeRestController {
 		return armeRepo.findAll();
 	}
 	
+	@GetMapping("/detail")
+	@JsonView(Views.ViewArmeDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public List<Arme> findDetailAll(){
+		return armeRepo.findAll();
+	}
+	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewArme.class)
-	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	public Arme findArmeId(@PathVariable Long id) {
+		Optional<Arme> optArme = armeRepo.findByArmeId(id);
+		
+		if (optArme.isPresent()) {
+			return optArme.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.ViewArmeDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public Arme findArmeDetailId(@PathVariable Long id) {
 		Optional<Arme> optArme = armeRepo.findByArmeId(id);
 		
 		if (optArme.isPresent()) {

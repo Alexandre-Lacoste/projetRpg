@@ -7,13 +7,22 @@ public class Views {
 	
 	public static class ViewPersonnage extends ViewCommon{}
 	public static class ViewHero extends ViewPersonnage{}
+	public static class ViewHeroDetail extends ViewHero{}
+	
+	
 	public static class ViewMonstre extends ViewPersonnage{}
+	public static class ViewMonstreDetail extends ViewMonstre{}
+	
+	
 	
 	public static class ViewArme extends ViewCommon{}
 	public static class ViewArmeDetail extends ViewArme{}
 	
 	public static class ViewArmure extends ViewCommon{}
+	public static class ViewArmureDetail extends ViewArmure{}
 	
+	public static class ViewPotion extends ViewCommon{}
+
 	public static class ViewInventaire extends ViewCommon{}
 	
 	public static class ViewInventaireArme extends ViewCommon{}

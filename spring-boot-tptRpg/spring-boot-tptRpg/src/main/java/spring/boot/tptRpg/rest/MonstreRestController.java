@@ -17,7 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import spring.boot.tptRpg.model.Hero;
 import spring.boot.tptRpg.model.Monstre;
 import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IPersonnageRepository;
@@ -35,11 +34,31 @@ public class MonstreRestController {
 	public List<Monstre> findAll(){
 		return persoRepo.findAllMonstre();
 	}
+
+	@GetMapping("/detail")
+	@JsonView(Views.ViewMonstreDetail.class)
+	public List<Monstre> findAllDetail(){
+		return persoRepo.findAllMonstre();
+	}
 	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewMonstre.class)
 	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	public Monstre findMonstreId(@PathVariable Long id) {
+		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
+		
+		if (optMonstre.isPresent()) {
+			return optMonstre.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.ViewMonstreDetail.class)
+	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public Monstre findMonstreDetailId(@PathVariable Long id) {
 		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
 		
 		if (optMonstre.isPresent()) {

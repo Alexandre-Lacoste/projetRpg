@@ -23,6 +23,7 @@ import spring.boot.tptRpg.model.Admin;
 import spring.boot.tptRpg.model.Compte;
 import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IAdminRepository;
+import spring.boot.tptRpg.repository.ICompteRepository;
 
 @RestController
 @RequestMapping("/admin")
@@ -31,11 +32,15 @@ public class AdminRestController {
 
 	@Autowired
 	private IAdminRepository adminRepo;
+	
+	@Autowired
+	private ICompteRepository compteRepo;
 
-	@GetMapping("")
+
+	@GetMapping("/admin")
 	@JsonView(Views.ViewAdmin.class)
-	@PreAuthorize("hasAnyRole('ADMIN')")
-	public List<Admin> findAll() {
+//	@PreAuthorize("hasAnyRole('ADMIN')")
+	public List<Admin> findAllAdmin() {
 		return adminRepo.findAll();
 	}
 
@@ -51,6 +56,15 @@ public class AdminRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
+	
+	@GetMapping("/compte")
+	@JsonView(Views.ViewAdmin.class)
+	public List<Compte> findAllCompte() {
+		return compteRepo.findAll();
+	}
+	
+	
+	
 
 	@PostMapping("")
 	@JsonView(Views.ViewAdmin.class)

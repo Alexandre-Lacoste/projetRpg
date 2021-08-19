@@ -10,12 +10,6 @@ import spring.boot.tptRpg.model.Compte;
 
 public interface ICompteRepository extends JpaRepository<Compte, Long> {
 	
-//	@Query("select a from Admin s")
-//	List<Admin> findAllAdmin(); // @Query
-//	
-//	@Query("select a from Admin a where a.id = :id")
-//	Optional<Admin> findAdminById(@Param("id") Long id);
-	
 	@Query("select distinct c from Compte c where c.pseudo = :pseudo")
 	Optional<Compte> findBypseudoWithRoles(@Param("pseudo") String pseudo);
 //	c left join fetch

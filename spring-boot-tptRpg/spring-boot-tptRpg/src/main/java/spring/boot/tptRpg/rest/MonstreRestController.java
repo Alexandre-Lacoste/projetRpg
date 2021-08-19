@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,6 +74,19 @@ public class MonstreRestController {
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	public Monstre create(@RequestBody Monstre monstre) {
 		monstre = persoRepo.save(monstre);
+		return monstre;
+	}
+	
+	@PutMapping("/{id}")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@JsonView(Views.ViewMonstre.class)
+	public  Monstre update(@RequestBody Monstre monstre  , @PathVariable Long id) {
+		if (!persoRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+
+		monstre = persoRepo.save(monstre);
+
 		return monstre;
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,6 +68,19 @@ public class HeroRestController {
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
+	}
+	
+	@PutMapping("/{id}")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@JsonView(Views.ViewHero.class)
+	public  Hero update(@RequestBody Hero hero  , @PathVariable Long id) {
+		if (!persoRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+
+		hero = persoRepo.save(hero);
+
+		return hero ;
 	}
 	
 	@PostMapping

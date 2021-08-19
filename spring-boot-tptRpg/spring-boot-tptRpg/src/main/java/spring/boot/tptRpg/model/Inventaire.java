@@ -31,19 +31,19 @@ public class Inventaire {
 	
 	@OneToOne
 	@JoinColumn(name = "utilisateur_id")
-	@JsonIgnore
+	@JsonIgnore	
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "inventaire")
-	@JsonIgnore
+	@JsonView(Views.ViewUtilisateur.class)
 	private List<InventairePotion> inventairePotion = new ArrayList<InventairePotion>();
 	
 	@OneToMany(mappedBy = "inventaire")
-	@JsonIgnore
+	@JsonView(Views.ViewUtilisateur.class)
 	private List<InventaireArme> inventaireArme = new ArrayList<InventaireArme>();
 	
 	@OneToMany(mappedBy = "inventaire")
-	@JsonIgnore
+	@JsonView(Views.ViewUtilisateur.class)
 	private List<InventaireArmure> inventaireArmure = new ArrayList<InventaireArmure>();
 
 	

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import spring.boot.tptRpg.model.Armure;
 import spring.boot.tptRpg.model.Hero;
+import spring.boot.tptRpg.model.InventaireArmure;
 import spring.boot.tptRpg.model.Views;
 import spring.boot.tptRpg.repository.IArmureRepository;
 
@@ -42,6 +44,8 @@ public class ArmureRestController {
 	public List<Armure> findAllDetail(){
 		return armureRepo.findAll();
 	}
+	
+
 	
 	
 	@GetMapping("/{id}")
@@ -77,6 +81,20 @@ public class ArmureRestController {
 	public Armure create(@RequestBody Armure armure) {
 		armure = armureRepo.save(armure);
 		return armure;
+	}
+	
+	
+	@PutMapping("/{id}")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@JsonView(Views.ViewArmure.class)
+	public  Armure update(@RequestBody Armure armure  , @PathVariable Long id) {
+		if (!armureRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+
+		armure = armureRepo.save(armure);
+
+		return armure ;
 	}
 	
 	@DeleteMapping

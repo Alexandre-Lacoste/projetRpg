@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,19 @@ public class InventaireRestController {
 	public Inventaire create(@RequestBody Inventaire inventaire) {
 		inventaire = inventaireRepo.save(inventaire);
 		return inventaire;
+	}
+	
+	@PutMapping("/{id}")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@JsonView(Views.ViewInventaire.class)
+	public Inventaire update(@RequestBody Inventaire inv , @PathVariable Long id) {
+		if (!inventaireRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+
+		inv = inventaireRepo.save(inv);
+
+		return inv;
 	}
 	
 	@DeleteMapping

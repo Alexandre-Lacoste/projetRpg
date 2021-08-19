@@ -29,7 +29,7 @@ public class InventairePotion {
 	private Inventaire inventaire;
 	@ManyToOne
 	@JoinColumn(name = "potion_id")
-	@JsonIgnore
+	@JsonView(Views.ViewUtilisateur.class)
 	private Potion potion;
 	
 	

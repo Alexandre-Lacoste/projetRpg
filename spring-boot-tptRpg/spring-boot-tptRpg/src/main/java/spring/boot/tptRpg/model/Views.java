@@ -3,11 +3,16 @@ package spring.boot.tptRpg.model;
 public class Views {
 	public static class ViewCommon{}
 	
+	public static class Compte extends ViewCommon{}
 	public static class ViewUtilisateur extends ViewCommon{}
+	public static class ViewUtilisateurDetail extends ViewUtilisateur{}
+	
+	
 	
 	public static class ViewPersonnage extends ViewCommon{}
 	public static class ViewHero extends ViewPersonnage{}
 	public static class ViewHeroDetail extends ViewHero{}
+
 	
 	
 	public static class ViewMonstre extends ViewPersonnage{}

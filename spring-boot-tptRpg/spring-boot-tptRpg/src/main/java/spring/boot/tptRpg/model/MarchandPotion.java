@@ -12,8 +12,6 @@ import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
-
 @Entity
 @Table(name="MarchandPotion")
 public class MarchandPotion {

@@ -25,7 +25,7 @@ import spring.boot.tptRpg.repository.IInventaireArmeRepository;
 
 @RestController
 @RequestMapping("/inventaireArme")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class InventaireArmeRestController {
 	@Autowired
 	private IInventaireArmeRepository invArmeRepo;

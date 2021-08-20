@@ -25,7 +25,7 @@ import spring.boot.tptRpg.repository.IUtilisateurRepository;
 
 @RestController
 @RequestMapping("/utilisateur")
-@CrossOrigin
+@CrossOrigin("*")
 
 public class UtilisateurRestController {
 

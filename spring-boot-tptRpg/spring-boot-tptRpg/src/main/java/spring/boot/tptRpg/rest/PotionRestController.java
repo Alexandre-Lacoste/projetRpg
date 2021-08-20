@@ -24,7 +24,7 @@ import spring.boot.tptRpg.repository.IPotionRepository;
 
 @RestController
 @RequestMapping("/potion")
-@CrossOrigin("")
+@CrossOrigin("*")
 public class PotionRestController {
 	
 	@Autowired

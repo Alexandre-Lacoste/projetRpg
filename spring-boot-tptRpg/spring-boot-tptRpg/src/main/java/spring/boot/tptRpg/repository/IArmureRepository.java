@@ -9,23 +9,22 @@ import spring.boot.tptRpg.model.TypeArmure;
 
 public interface IArmureRepository extends JpaRepository<Armure, Long> {
 
-//	
-//	@Query("SELECT a FROM Armure a ORDER BY a.prixAchat ASC")
-//	Armure orderByBuyingPriceAsc();
-//	
-//	@Query("SELECT a FROM Armure a ORDER BY a.prixAchat DESC")
-//	Armure orderByBuyingPriceDesc();
-//	
-//	@Query("SELECT a FROM Armure a ORDER BY a.prixVente ASC")
-//	Armure orderBySellingPriceAsc();
-//	
-//	@Query("SELECT a FROM Armure a ORDER BY a.prixVente DESC")
-//	Armure orderBySellingPriceDesc();
-//	
+	
+	@Query("SELECT a FROM Armure a ORDER BY a.prixAchat ASC")
+	Armure orderByBuyingPriceAsc();
+	
+	@Query("SELECT a FROM Armure a ORDER BY a.prixAchat DESC")
+	Armure orderByBuyingPriceDesc();
+	
+	@Query("SELECT a FROM Armure a ORDER BY a.prixVente ASC")
+	Armure orderBySellingPriceAsc();
+	
+	@Query("SELECT a FROM Armure a ORDER BY a.prixVente DESC")
+	Armure orderBySellingPriceDesc();
+	
 	// Pour trouver les classer en fonction de leur type
 	@Query("SELECT a FROM Armure a ORDER BY a.typearmure ASC")
 	Armure findAllByTypeArmureAsc();
-	
 	@Query("SELECT a FROM Armure a ORDER BY a.typearmure DESC")
 	Armure findAllByTypeArmureDesc();
 	
@@ -36,8 +35,7 @@ public interface IArmureRepository extends JpaRepository<Armure, Long> {
 	
 	
 	@Query("SELECT a.prixAchat FROM Armure a where a.nom = :nom")
-	Armure findArmureBuyingPriceFromName(@Param("nom") Long nom);
-	
+	double findArmureBuyingPriceFromName(@Param("nom") Long nom);
 	@Query("select a from Armure a where a.nom = :nom")
 	Armure findByName(@Param("nom") String nom);
 }

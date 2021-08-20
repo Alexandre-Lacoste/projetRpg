@@ -60,7 +60,7 @@ public class MarchandRestController {
 //		if(result.hasErrors()) {
 //			throw new MarchandValidationException();
 //		}
-//		
+		
 		marchand = marchandRepo.save(marchand);
 
 		return marchand;

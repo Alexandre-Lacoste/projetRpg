@@ -35,7 +35,7 @@ public interface IPotionRepository  extends JpaRepository<Potion, Long>{
 	
 	
 	@Query("SELECT p.prixAchat FROM Potion p where p.nom = :nom")
-	Potion findPotionBuyingPriceFromName(@Param("nom") Long nom);
+	double findPotionBuyingPriceFromName(@Param("nom") Long nom);
 	
 
 	

@@ -39,12 +39,5 @@ public class Views {
 	public static class ViewMarchandArmure extends ViewCommon{}
 	public static class ViewMarchand extends ViewCommon{}
 
-	public static class ViewMarchandArme extends ViewCommon{}
-	public static class ViewMarchandArmure extends ViewCommon{}
-	public static class ViewMarchandPotion extends ViewCommon{}
-
-	
-	
-
 
 }

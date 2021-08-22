@@ -13,23 +13,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Potion")
 public class Potion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Column
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private TypePotion type;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double valeur;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double prixAchat;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double prixVente;
 	@OneToMany(mappedBy = "potion")
 	private List<InventairePotion> inventairePotions = new ArrayList<InventairePotion>();

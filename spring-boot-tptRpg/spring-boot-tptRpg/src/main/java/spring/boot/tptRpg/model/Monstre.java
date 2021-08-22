@@ -11,25 +11,35 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("monstre")
 public class Monstre extends Personnage {
 	@Enumerated(EnumType.STRING)
 	@Column(name="TypeMonstre")
+	@JsonView(Views.ViewCommon.class)
 	private TypeMonstre typeMonstre;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double attaque;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double defense;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double vie;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double agilite;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private double vitesse;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private int gold;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private int exp;
 	@ManyToOne
 	@JoinColumn(name="arme_id")

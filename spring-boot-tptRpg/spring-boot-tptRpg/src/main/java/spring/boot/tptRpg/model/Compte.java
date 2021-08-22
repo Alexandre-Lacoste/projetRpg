@@ -39,11 +39,13 @@ public class Compte {
 	@Column()
 	private String mdp;
 	
+	@JsonView(Views.ViewCommon.class)
 	private boolean enable;
 //	@OneToMany(mappedBy = "compte")
 //	private Set<CompteRole> roles;
 	
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private Role role;
 	
 	public Compte() {

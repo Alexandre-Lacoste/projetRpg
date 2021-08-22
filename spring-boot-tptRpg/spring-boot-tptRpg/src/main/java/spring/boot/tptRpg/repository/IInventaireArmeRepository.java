@@ -6,17 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import spring.boot.tptRpg.model.*;
-
+import spring.boot.tptRpg.model.Arme;
+import spring.boot.tptRpg.model.InventaireArme;
+import spring.boot.tptRpg.model.TypeArme;
 
 public interface IInventaireArmeRepository  extends JpaRepository<InventaireArme, Long>{
 	@Query("select ip.arme from InventaireArme ip  where ip.inventaire.id = :id")
 	List<Arme> findAllArmeByInventaireId(@Param("id") Long id); // @Query
 	
-	@Query("select ip.arme from InventaireArme ip  where ip.arme.typeArme = :type")
+	@Query("select ip.arme from InventaireArme ip  where ip.arme.typearme = :type")
 	List<Arme> findAllArmeByType( @Param("type") TypeArme type); // @Query
 	
-	@Query("select ip.arme from InventaireArme ip  where ip.arme.typeArme = :type and ip.inventaire.id = :id")
+	@Query("select ip.arme from InventaireArme ip  where ip.arme.typearme = :type and ip.inventaire.id = :id")
 	List<Arme> findAllArmeByTypeAndInventaireId( @Param("type") TypeArme type,@Param("id") Long id); // @Query
 
 	@Query("select ip.arme from InventaireArme ip where ip.arme.nom = :nom and ip.inventaire.id = :id")

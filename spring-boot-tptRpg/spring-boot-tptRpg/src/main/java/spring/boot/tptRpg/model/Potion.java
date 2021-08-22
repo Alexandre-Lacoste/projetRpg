@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -40,8 +41,10 @@ public class Potion {
 	@JsonView(Views.ViewCommon.class)
 	private double prixVente;
 	@OneToMany(mappedBy = "potion")
+	@JsonIgnore
 	private List<InventairePotion> inventairePotions = new ArrayList<InventairePotion>();
 	@OneToMany(mappedBy = "potion")
+	@JsonIgnore
 	private List<MarchandPotion> marchandPotions = new ArrayList<MarchandPotion>();
 	
 	public Potion() {

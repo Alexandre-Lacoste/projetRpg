@@ -21,3 +21,4 @@ public interface ICompteRepository extends JpaRepository<Compte, Long> {
 	Optional<Compte> findCompteByMail(@Param("mail") String mail); // @Query
 
 }
+	

@@ -13,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Arme{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class})
 	private Long id;
 	@Version
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private int version;
 	@Column(name="nom")
 	@JsonView(Views.ViewCommon.class)
@@ -34,27 +34,30 @@ public class Arme{
 	@Column(name="typeArme")
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.ViewCommon.class)
-	private TypeArme typeArme;
+	private TypeArme typearme;
 	@Column(name="description")
 	@Lob
 	@JsonView(Views.ViewCommon.class)
 	private String description;
 	@Column(name="attaque")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArme.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double attaque;
 	@Column(name="agilite")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArme.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double agilite;
 	@Column(name="prixAchat")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixAchat;
 	@Column(name="prixVente")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmeDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixVente;
 	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<MarchandArme> marchandArmes = new ArrayList<MarchandArme>();
+	
 	@OneToMany(mappedBy = "arme")
+	@JsonIgnore
 	private List<InventaireArme> inventaireArme = new ArrayList<InventaireArme>();
 	
 	
@@ -65,7 +68,7 @@ public class Arme{
 		this.id = id;
 		this.version = version;
 		this.nom = nom;
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 		this.description = description;
 		this.attaque = attaque;
 		this.agilite = agilite;
@@ -82,7 +85,7 @@ public class Arme{
 			double prixVente) {
 		super();
 		this.nom = nom;
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 		this.description = description;
 		this.attaque = attaque;
 		this.agilite = agilite;
@@ -126,11 +129,11 @@ public class Arme{
 	}
 
 	public TypeArme getTypeArme() {
-		return typeArme;
+		return typearme;
 	}
 
 	public void setTypeArme(TypeArme typeArme) {
-		this.typeArme = typeArme;
+		this.typearme = typeArme;
 	}
 
 	public String getDescription() {
@@ -191,7 +194,7 @@ public class Arme{
 
 	@Override
 	public String toString() {
-		return "Arme [id=" + id + ", version=" + version + ", nom=" + nom + ", typeArme=" + typeArme + ", description="
+		return "Arme [id=" + id + ", version=" + version + ", nom=" + nom + ", typeArme=" + typearme + ", description="
 				+ description + ", attaque=" + attaque + ", agilite=" + agilite + ", prixAchat=" + prixAchat
 				+ ", prixVente=" + prixVente+"]";
 	}

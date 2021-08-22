@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Personnage")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -23,12 +26,15 @@ public abstract class Personnage  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
 	private int version;
+	@JsonView(Views.ViewCommon.class)
 	@Column(name = "nom", length = 20)
 	private String nom;
 	@OneToMany(mappedBy = "personnage")
+	@JsonIgnore
 	private List<Equipe> equipes = new ArrayList<Equipe>();
 	
 	public Personnage() {

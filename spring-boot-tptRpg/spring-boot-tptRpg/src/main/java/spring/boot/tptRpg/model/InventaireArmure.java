@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name="InventaireArmure")
@@ -16,16 +19,20 @@ public class InventaireArmure {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double qte;
 	
 	@ManyToOne
 	@JoinColumn(name="armure_id")
+	@JsonView(Views.ViewUtilisateur.class)
 	private Armure armure;
 	
 	@ManyToOne
 	@JoinColumn(name="inventaire_id")
+	@JsonIgnore
 	private Inventaire inventaire;
 	
 	

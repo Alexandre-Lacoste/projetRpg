@@ -28,7 +28,7 @@ public class Compte {
 	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewCommon.class)
+	@JsonView(Views.Compte.class)
 	private int version;
 	@Column()
 	@JsonView(Views.ViewCommon.class)
@@ -37,6 +37,7 @@ public class Compte {
 	@JsonView(Views.ViewCommon.class)
 	private String mail;
 	@Column()
+	@JsonView(Views.ViewCommon.class)
 	private String mdp;
 	
 	@JsonView(Views.ViewCommon.class)

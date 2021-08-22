@@ -8,27 +8,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="MarchandArme")
 public class MarchandArme {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="quantite")
+	@JsonView(Views.ViewCommon.class)
 	private double quantite;
 	
 	//@Transient
 	@ManyToOne
 	@JoinColumn(name="arme_id")
+	@JsonView(Views.ViewArme.class)
 	private Arme arme;
 	//@Transient
 	@ManyToOne
 	@JoinColumn(name="marchand_id")
+	@JsonView(Views.ViewArme.class)
 	private Marchand marchand;
 	
 	public MarchandArme(Long id, int version, double quantite, Arme arme, Marchand marchand) {

@@ -18,52 +18,33 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import spring.boot.tptRpg.model.Monstre;
+import spring.boot.tptRpg.model.Hero;
+import spring.boot.tptRpg.model.Inventaire;
 import spring.boot.tptRpg.model.Views;
-import spring.boot.tptRpg.repository.IPersonnageRepository;
+import spring.boot.tptRpg.repository.IInventaireRepository;
 
 @RestController
-@RequestMapping("/monstre")
+@RequestMapping("/inventaire")
 @CrossOrigin("*")
-public class MonstreRestController {
+public class InventaireRestController {
 	
 	@Autowired
-	private IPersonnageRepository persoRepo;
+	private IInventaireRepository inventaireRepo;
 	
 	@GetMapping("")
-	@JsonView(Views.ViewMonstre.class)
-	public List<Monstre> findAll(){
-		return persoRepo.findAllMonstre();
-	}
-
-	@GetMapping("/detail")
-	@JsonView(Views.ViewMonstreDetail.class)
-	public List<Monstre> findAllDetail(){
-		return persoRepo.findAllMonstre();
+	@JsonView(Views.ViewInventaire.class)
+	public List<Inventaire> findAll(){
+		return inventaireRepo.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewMonstre.class)
+	@JsonView(Views.ViewInventaire.class)
 	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public Monstre findMonstreId(@PathVariable Long id) {
-		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
+	public Inventaire findInventaireId(@PathVariable Long id) {
+		Optional<Inventaire> optInventaire = inventaireRepo.findById(id);
 		
-		if (optMonstre.isPresent()) {
-			return optMonstre.get();
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-		}
-	}
-	
-	
-	@GetMapping("/{id}/detail")
-	@JsonView(Views.ViewMonstreDetail.class)
-	//@PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public Monstre findMonstreDetailId(@PathVariable Long id) {
-		Optional<Monstre> optMonstre = persoRepo.findMonstreById(id);
-		
-		if (optMonstre.isPresent()) {
-			return optMonstre.get();
+		if (optInventaire.isPresent()) {
+			return optInventaire.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
@@ -72,32 +53,32 @@ public class MonstreRestController {
 	@PostMapping
 	//@JsonView(Views.ViewAdmin.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
-	public Monstre create(@RequestBody Monstre monstre) {
-		monstre = persoRepo.save(monstre);
-		return monstre;
+	public Inventaire create(@RequestBody Inventaire inventaire) {
+		inventaire = inventaireRepo.save(inventaire);
+		return inventaire;
 	}
 	
 	@PutMapping("/{id}")
 	//@PreAuthorize("hasAnyRole('ADMIN')")
-	@JsonView(Views.ViewMonstre.class)
-	public  Monstre update(@RequestBody Monstre monstre  , @PathVariable Long id) {
-		if (!persoRepo.existsById(id)) {
+	@JsonView(Views.ViewInventaire.class)
+	public Inventaire update(@RequestBody Inventaire inv , @PathVariable Long id) {
+		if (!inventaireRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		monstre = persoRepo.save(monstre);
+		inv = inventaireRepo.save(inv);
 
-		return monstre;
+		return inv;
 	}
 	
 	@DeleteMapping
 	//@JsonView(Views.ViewAdmin.class)
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	public void delete(@PathVariable Long id) {
-		if(!persoRepo.existsById(id)) {
+		if(!inventaireRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
-		persoRepo.deleteById(id);
+		inventaireRepo.deleteById(id);
 	}
 
 }

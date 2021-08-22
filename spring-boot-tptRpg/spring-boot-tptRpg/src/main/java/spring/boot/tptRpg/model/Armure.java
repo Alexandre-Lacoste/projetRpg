@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -22,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Armure {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmureDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private Long id;
 	@Version
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmureDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private int version;
 	@Column(name="nom")
 	@JsonView(Views.ViewCommon.class)
@@ -42,22 +43,25 @@ public class Armure {
 	private String description;
 	
 	@Column(name="defense")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmure.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double defense;
 	
 	@Column(name="vitesse")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmure.class,Views.ViewUtilisateurDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateur.class})
 	private double vitesse;
+	
 	@Column(name="prixVente")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmureDetail.class,Views.ViewMonstreDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixVente;
 	@Column(name="prixAchat")
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewArmureDetail.class,Views.ViewUtilisateurDetail.class,Views.ViewUtilisateur.class})
 	private double prixAchat;
 	
 	@OneToMany(mappedBy = "armure")
+	@JsonIgnore
 	private List<MarchandArmure> marchandArmures = new ArrayList<MarchandArmure>();
 	@OneToMany(mappedBy = "armure")
+	@JsonIgnore
 	private List<InventaireArmure> inventaireArmures = new ArrayList<InventaireArmure>();
 	
 	public Armure(Long id, int version, String nom, TypeArmure typearmure, String description, double defense,

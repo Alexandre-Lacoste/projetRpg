@@ -28,6 +28,7 @@ public interface IArmureRepository extends JpaRepository<Armure, Long> {
 	@Query("SELECT a FROM Armure a ORDER BY a.typearmure DESC")
 	Armure findAllByTypeArmureDesc();
 	
+	
 	//Pour choisir un type precis à afficher
 	@Query("SELECT a FROM Armure a WHERE a.typearmure = :type")
 	Armure findTypeArmure(@Param("type") TypeArmure type);
